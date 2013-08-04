@@ -1,0 +1,17 @@
+{
+    "name": "hutushen222/jianshu-rss",
+    "description": "Jianshu RSS Generator.",
+    "require": {
+        "slim/slim": "2.*",
+        "slim/extras": "2.*",
+        "php": ">=5.3.0",
+        "suin/php-rss-writer": ">=1.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jack Hu",
+            "email": "hutushen222@gmail.com"
+        }
+    ]
+}
