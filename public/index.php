@@ -87,10 +87,10 @@ $app->get('/feeds/recommendations/notes', function () use ($app) {
         ->appendTo($feed);
     foreach ($notes as $note) {
         $item = new \Suin\RSSWriter\Item();
-        $item = $item->title($note->title)
+        $item = $item->title($note->title . ' by ' . $note->author . ' · ' . $note->book)
             ->url(JIANSHU . $note->uri)
-            ->pubDate(strtotime($note->created))
             ->description($note->body)
+            ->pubDate(strtotime($note->created))
             ->appendTo($channel);
     }
 
