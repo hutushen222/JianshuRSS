@@ -10,12 +10,26 @@ $app = new \Slim\Slim(require '../config.php');
 
 $app->get('/', function () use ($app) {
 
-    echo 'Jianshu RSS!';
+    $app->render('home.tpl.php', array(
+        'action' => $app->urlFor('home'),
+    ));
 
 })->name('home');
 
 $app->post('/', function () use ($app) {
+    $url = trim($app->request()->post('url'));
 
+    if ($url && str_start_with(JIANSHU, $url)) {
+        if (str_start_with(JIANSHU_RECOMMENDATIONS_NOTES, $url)) {
+            $app->redirect($app->urlFor('feeds.recommendations'));
+        } elseif (str_start_with(JIANSHU_COLLECTIONS_ROOT, $url)) {
+            $app->redirect($app->urlFor('feeds.collections', array('id' => substr($url, strlen(JIANSHU_COLLECTIONS_ROOT)))));
+        } else {
+            throw new Exception('Invalid Jianshu URL.');
+        }
+    } else {
+        throw new Exception('Invalid Jianshu URL.');
+    }
 });
 
 $app->get('/about', function () use ($app) {
@@ -52,7 +66,6 @@ $app->get('/feeds/recommendations/notes', function () use ($app) {
 
         $notes[] = $note;
     }
-
     // Notes
     foreach ($notes as $note) {
         $note_file_path = NOTES_ROOT . DS . md5($note->uri) . '.html';
@@ -74,6 +87,7 @@ $app->get('/feeds/recommendations/notes', function () use ($app) {
         $note->book_uri = $html->find('.article .article-info a', 0)->href;
         $note->author_uri = $html->find('.people .author', 0)->href;
         $note->body = $html->find('.show-content', 0)->innertext;
+        $note->created = trim($html->find('.article-info p', 0)->find('text', 3));
     }
 
     // Feed

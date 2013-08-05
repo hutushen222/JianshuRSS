@@ -6,7 +6,10 @@
 </head>
 <body>
 
-<form action=""
+<form action="<?php echo $action; ?>" method="post">
+    <input type="text" id="url" name="url" value="">
+    <button type="submit">Go</button>
+</form>
 
 </body>
 </html>
