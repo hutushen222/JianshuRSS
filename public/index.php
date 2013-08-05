@@ -137,7 +137,7 @@ $app->get('/feeds/collections/:id', function ($id) use ($app) {
 
         $note->author = trim($html->find('.people .author', 0)->plaintext);
         $note->author_uri = $html->find('.people .author', 0)->href;
-        $note->book = $html->find('.article .article-info a', 0)->plaintext;
+        $note->book = trim($html->find('.article .article-info a', 0)->plaintext);
         $note->book_uri = $html->find('.article .article-info a', 0)->href;
         $note->author_uri = $html->find('.people .author', 0)->href;
         $note->body = $html->find('.show-content', 0)->innertext;
