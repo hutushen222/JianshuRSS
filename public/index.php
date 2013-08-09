@@ -12,6 +12,7 @@ $app->get('/', function () use ($app) {
 
     $app->render('home.tpl.php', array(
         'action' => $app->urlFor('home'),
+        'rootUri' => $app->request()->getRootUri(),
     ));
 
 })->name('home');
