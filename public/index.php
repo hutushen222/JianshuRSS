@@ -33,7 +33,7 @@ $app->post('/', function () use ($app) {
             throw new Exception('Invalid Jianshu URL.');
         }
     } else {
-        throw new Exception('Invalid Jianshu URL.');
+        $app->redirect($app->urlFor('feeds.recommendations'));
     }
 });
 
