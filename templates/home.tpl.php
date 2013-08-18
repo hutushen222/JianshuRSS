@@ -18,7 +18,7 @@
 
     <form action="<?php echo $action; ?>" method="post">
         <div class="form-group">
-            <input id="url" type="text" class="form-control" name="url" value="" placeholder="http://jianshu.io/recommendations/notes">
+            <input id="url" type="text" class="form-control" name="url" value="" placeholder="请输入简书的地址，如：http://jianshu.io/recommendations/notes">
             <input id="submit-url" type="submit" class="btn btn-primary btn-lg btn-block" value="Go">
         </div>
     </form>
