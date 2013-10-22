@@ -64,13 +64,14 @@ $app->get('/feeds/recommendations/notes', function () use ($app) {
         'description' => '简书是一款属于写作者的笔记本, 我们致力于提供一个简洁而优雅的环境让你专注于书写。',
     );
     $notes = array();
-    foreach ($html->find('.thumbnail') as $element) {
+    foreach ($html->find('.thumbnails li a.title') as $element) {
         $note = new stdClass();
-        $note->title = trim($element->find('h4', 0)->plaintext);
+        $note->title = trim($element->plaintext);
         $note->uri = $element->href;
 
         $notes[] = $note;
     }
+
     // Notes
     foreach ($notes as $note) {
         fetchNote($note);

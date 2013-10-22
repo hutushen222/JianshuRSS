@@ -36,7 +36,9 @@
 
     <div class="footer">
         <div class="author">
-            ♥ Lovingly made by <a data-toggle="tooltip" title="Coder" href="http://milkythinking.com">hutushen222</a> & <a data-toggle="tooltip" title="PAGE MAN" href="http://parazzi.me/about">JoeZhao</a>.
+            <span>♥ Lovingly made by <a data-toggle="tooltip" title="Coder" href="http://milkythinking.com">hutushen222</a> & <a data-toggle="tooltip" title="PAGE MAN" href="http://parazzi.me/about">JoeZhao</a>.</span>
+            <br>
+            <span>Feedback to: <a href="http://weibo.com/hutushen222" target="_blank" title="Weibo">hutushen222</a></span>
         </div>
     </div>
 
