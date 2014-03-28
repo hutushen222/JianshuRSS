@@ -25,7 +25,7 @@ $app->post('/', function () use ($app) {
             $app->redirect($app->urlFor('feeds.recommendations'));
         } elseif (str_start_with(JIANSHU_COLLECTIONS_ROOT, $url)) {
             $app->redirect($app->urlFor('feeds.collections', array('id' => substr($url, strlen(JIANSHU_COLLECTIONS_ROOT)))));
-        } elseif(str_start_with(JIANSHU_NOTEBOOKS_ROOT, $url) && str_end_with('/list', $url)) {
+        } elseif(str_start_with(JIANSHU_NOTEBOOKS_ROOT, $url) && str_end_with('/latest', $url)) {
             $app->redirect($app->urlFor('feeds.notebooks', array('id' => intval(substr($url, strlen(JIANSHU_NOTEBOOKS_ROOT))))));
         } elseif (str_start_with(JIANSHU_USERS_ROOT, $url)) {
             $app->redirect($app->urlFor('feeds.users', array('id' => substr($url, strlen(JIANSHU_USERS_ROOT)))));
@@ -150,22 +150,22 @@ $app->get('/feeds/collections/:id', function ($id) use ($app) {
 
     return $res;
 })->name('feeds.collections')
-    ->conditions(array('id' => '[a-zA-Z0-9]{6}'));
+    ->conditions(array('id' => '[a-zA-Z0-9]*'));
 
 $app->get('/feeds/notebooks/:id', function ($id) use ($app) {
-    $html_str = file_get_contents(JIANSHU_NOTEBOOKS_ROOT . $id . '/list');
+    $html_str = file_get_contents(JIANSHU_NOTEBOOKS_ROOT . $id . '/latest');
     $html = str_get_html($html_str);
 
     $meta = array(
-        'title' => trim($html->find('.notebook-header .title', 0)->plaintext),
-        'link' => JIANSHU_NOTEBOOKS_ROOT . $id . '/list',
-        'description' => 'by ' . trim($html->find('.notebook-header .author', 0)->plaintext),
+        'title' => trim($html->find('.aside .title', 0)->plaintext),
+        'link' => JIANSHU_NOTEBOOKS_ROOT . $id . '/latest',
+        'description' => 'by ' . trim($html->find('.aside .author a', 1)->plaintext),
     );
 
     $notes = array();
-    foreach ($html->find('.thumbnail') as $element) {
+    foreach ($html->find('.thumbnails li') as $element) {
         $note = new stdClass();
-        $note->uri = $element->href;
+        $note->uri = $element->find('h4 a', 0)->href;
         $note->title = trim($element->find('h4', 0)->plaintext);
 
         $notes[] = $note;
@@ -251,7 +251,7 @@ $app->get('/feeds/users/:id', function ($id) use ($app) {
     return $res;
 
 })->name('feeds.users')
-    ->conditions(array('id' => '[a-zA-Z0-9]{6}'));
+    ->conditions(array('id' => '[a-zA-Z0-9]*'));
 
 // Run app
 $app->run();
