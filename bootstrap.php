@@ -13,6 +13,6 @@ define('NOTES_ROOT', ROOT . DS . 'storage' . DS . 'notes');
 
 define('JIANSHU', 'http://jianshu.io');
 define('JIANSHU_RECOMMENDATIONS_NOTES', 'http://jianshu.io/recommendations/notes');
-define('JIANSHU_COLLECTIONS_ROOT', 'http://jianshu.io/c/');
+define('JIANSHU_COLLECTIONS_ROOT', 'http://jianshu.io/collection/');
 define('JIANSHU_NOTEBOOKS_ROOT', 'http://jianshu.io/notebooks/');
 define('JIANSHU_USERS_ROOT', 'http://jianshu.io/users/');

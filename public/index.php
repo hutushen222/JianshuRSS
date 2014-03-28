@@ -107,15 +107,15 @@ $app->get('/feeds/collections/:id', function ($id) use ($app) {
     $html = str_get_html($html_str);
 
     $meta = array(
-        'title' => trim($html->find('.header .title', 0)->plaintext),
+        'title' => trim($html->find('.aside .title', 0)->plaintext),
         'link' => JIANSHU_COLLECTIONS_ROOT . $id,
-        'description' => trim($html->find('.header .description', 0)->plaintext),
+        'description' => trim($html->find('.aside .description', 0)->plaintext),
     );
 
     $notes = array();
-    foreach ($html->find('.thumbnail') as $element) {
+    foreach ($html->find('.thumbnails li') as $element) {
         $note = new stdClass();
-        $note->uri = $element->href;
+        $note->uri = $element->find('h4 a', 0)->href;
         $note->title = trim($element->find('h4', 0)->plaintext);
 
         $notes[] = $note;
@@ -207,7 +207,7 @@ $app->get('/feeds/users/:id', function ($id) use ($app) {
     $html = str_get_html($html_str);
 
     $meta = array(
-        'title' => trim($html->find('.people .name', 0)->plaintext),
+        'title' => trim($html->find('.people .basic-info h3 a', 0)->plaintext),
         'link' => JIANSHU_USERS_ROOT . $id,
         'description' => trim($html->find('.people .about .intro', 0)->plaintext),
     );
