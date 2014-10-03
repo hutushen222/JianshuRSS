@@ -63,7 +63,7 @@ $app->get('/feeds/recommendations/notes', function () use ($app) {
 
     $html = str_get_html($html_str);
     $meta = array(
-        'title' => $html->find('.page-title', 0)->plaintext,
+        'title' => '编辑推荐',
         'link' => JIANSHU_RECOMMENDATIONS_NOTES,
         'description' => '简书是一款属于写作者的笔记本, 我们致力于提供一个简洁而优雅的环境让你专注于书写。',
     );
