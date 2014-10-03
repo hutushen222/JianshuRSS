@@ -25,13 +25,19 @@ $app->post('/', function () use ($app) {
             $app->redirect($app->urlFor('feeds.recommendations'));
         } elseif (str_start_with(JIANSHU_COLLECTIONS_ROOT, $url)) {
             $app->redirect($app->urlFor('feeds.collections', array('id' => substr($url, strlen(JIANSHU_COLLECTIONS_ROOT)))));
-        } elseif(str_start_with(JIANSHU_NOTEBOOKS_ROOT, $url) && str_end_with('/latest', $url)) {
-            $app->redirect($app->urlFor('feeds.notebooks', array('id' => intval(substr($url, strlen(JIANSHU_NOTEBOOKS_ROOT))))));
+        } elseif(str_start_with(JIANSHU_NOTEBOOKS_ROOT, $url)) {
+            $id = substr($url, strlen(JIANSHU_NOTEBOOKS_ROOT));
+            if (($pos = strpos($id, '/')) !== false) {
+                $id = substr($id, 0, $pos);
+            }
+
+            $app->redirect($app->urlFor('feeds.notebooks', array('id' => $id)));
         } elseif (str_start_with(JIANSHU_USERS_ROOT, $url)) {
             $id = substr($url, strlen(JIANSHU_USERS_ROOT));
             if (($pos = strpos($id, '/')) !== false) {
                 $id = substr($id, 0, $pos);
             }
+
             $app->redirect($app->urlFor('feeds.users', array('id' => $id)));
         } else {
             throw new Exception('Invalid Jianshu URL.');
