@@ -30,11 +30,17 @@ function fetchNote($note) {
 
     $html = str_get_html($html_str);
 
-    $note->author = trim($html->find('.people .author', 0)->plaintext);
-    $note->author_uri = $html->find('.people .author', 0)->href;
-    $note->book = trim($html->find('.article .article-info a', 0)->plaintext);
-    $note->book_uri = $html->find('.article .article-info a', 0)->href;
-    $note->author_uri = $html->find('.people .author', 0)->href;
-    $note->body = $html->find('.show-content', 0)->innertext;
-    $note->created = trim($html->find('.article-info p', 0)->find('text', 3));
+    $author = $html->find('.meta-top a', 0);
+    $note->author = trim($author->plaintext);
+    $note->author_uri = $author->href;
+
+    if (!isset($note->book)) {
+        $note->book = '';
+        $note->book_uri = '';
+    }
+
+    $note->body = $html->find('.article .show-content', 0)->innertext;
+    $created = $html->find('.article .meta-top span', 1)->plaintext;
+
+    $note->created = strtr($created, '.', '-');
 }

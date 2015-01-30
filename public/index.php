@@ -73,11 +73,18 @@ $app->get('/feeds/recommendations/notes', function () use ($app) {
         'link' => JIANSHU_RECOMMENDATIONS_NOTES,
         'description' => '简书是一款属于写作者的笔记本, 我们致力于提供一个简洁而优雅的环境让你专注于书写。',
     );
+
     $notes = array();
-    foreach ($html->find('.thumbnails li a.title') as $element) {
+    foreach ($html->find('.thumbnails li .article') as $article) {
         $note = new stdClass();
-        $note->title = trim($element->plaintext);
-        $note->uri = $element->href;
+
+        $title = $article->find('a.title', 0);
+        $note->title = trim($title->plaintext);
+        $note->uri = $title->href;
+
+        $notebook = $article->find('a.notebook', 0);
+        $note->book = trim($notebook->plaintext);
+        $note->book_uri = $notebook->href;
 
         $notes[] = $note;
     }
@@ -123,10 +130,16 @@ $app->get('/feeds/collections/:id', function ($id) use ($app) {
     );
 
     $notes = array();
-    foreach ($html->find('.thumbnails li') as $element) {
+    foreach ($html->find('.thumbnails li') as $article) {
         $note = new stdClass();
-        $note->uri = $element->find('h4 a', 0)->href;
-        $note->title = trim($element->find('h4', 0)->plaintext);
+
+        $title = $article->find('h4 a', 0);
+        $note->title = trim($title->plaintext);
+        $note->uri = $title->href;
+
+        $notebook = $article->find('a.notebook', 0);
+        $note->book = trim($notebook->plaintext);
+        $note->book_uri = $notebook->href;
 
         $notes[] = $note;
     }
@@ -172,11 +185,16 @@ $app->get('/feeds/notebooks/:id', function ($id) use ($app) {
         'description' => 'by ' . trim($html->find('.aside .author a', 1)->plaintext),
     );
 
+
+
     $notes = array();
     foreach ($html->find('.thumbnails li') as $element) {
         $note = new stdClass();
         $note->uri = $element->find('h4 a', 0)->href;
         $note->title = trim($element->find('h4', 0)->plaintext);
+
+        $note->book = $meta['title'];
+        $note->book_uri = $meta['link'];
 
         $notes[] = $note;
     }
@@ -223,10 +241,16 @@ $app->get('/feeds/users/:id', function ($id) use ($app) {
     );
 
     $notes = array();
-    foreach ($html->find('.recent-post .title') as $element) {
+    foreach ($html->find('.recent-post .latest-notes li') as $article) {
         $note = new stdClass();
-        $note->uri = $element->href;
-        $note->title = trim($element->plaintext);
+
+        $title = $article->find('.title', 0);
+        $note->uri = $title->href;
+        $note->title = trim($title->plaintext);
+
+        $notebook = $article->find('a.notebook', 0);
+        $note->book = trim($notebook->plaintext);
+        $note->book_uri = $notebook->href;
 
         $notes[] = $note;
     }
