@@ -25,6 +25,7 @@
 
     <div class="hot-links">
         <ul class="list-unstyled list-inline clearfix">
+            <li><a target="_blank" href="<?=$rootUri?>/feeds/latest/notes" title="简书最新文章">最新文章</a></li>
             <li><a target="_blank" href="<?=$rootUri?>/feeds/recommendations/notes" title="简书编辑推荐">编辑推荐</a></li>
             <li><a target="_blank" href="<?=$rootUri?>/feeds/collections/u1J6LM" title="思考中国的过去、现在及未来。">想想中国</a></li>
             <li><a target="_blank" href="<?=$rootUri?>/feeds/users/y4D4YX" title="滤镜菲林是一个基于互联网平台的新闻实验室，欢迎各位媒体极客。">滤镜菲林</a></li>
