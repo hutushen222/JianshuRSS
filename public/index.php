@@ -58,16 +58,11 @@ $app->get('/about', function () use ($app) {
 $app->get('/feeds/latest/notes', function () use ($app) {
 
     // List
-    $latest_notes_file_path = CACHE_ROOT . DS . 'latest-notes.html';
-    if (file_exists($latest_notes_file_path) && filemtime($latest_notes_file_path) > time() - 900) {
-        $html_str = file_get_contents($latest_notes_file_path);
-    } else {
-        $html_str = file_get_contents(JIANSHU_ALL_NOTES);
-        if ($html_str === false) {
-            throw new Exception('Can not fetch Jianshu note\'s content with uri: ' . JIANSHU_ALL_NOTES);
-        }
-        file_put_contents($latest_notes_file_path, $html_str);
+    $html_str = file_get_contents(JIANSHU_ALL_NOTES);
+    if ($html_str === false) {
+        throw new Exception('Can not fetch Jianshu note\'s content with uri: ' . JIANSHU_ALL_NOTES);
     }
+
 
     $html = str_get_html($html_str);
     $meta = array(
