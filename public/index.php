@@ -77,6 +77,7 @@ $app->get('/feeds/latest/notes', function () use ($app) {
     );
 
     $notes = array();
+    $i = 0;
     foreach ($html->find('ul.all-list li') as $article) {
         $note = new stdClass();
 
@@ -89,6 +90,8 @@ $app->get('/feeds/latest/notes', function () use ($app) {
         $note->book_uri = $notebook->href;
 
         $notes[] = $note;
+
+        if (++$i >= 10) break;
     }
 
     // Notes
