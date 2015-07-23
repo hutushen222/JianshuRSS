@@ -30,7 +30,7 @@ function fetchNote($note) {
 
     $html = str_get_html($html_str);
 
-    $author = $html->find('.meta-top a', 0);
+    $author = $html->find('a.author-name', 0);
     $note->author = trim($author->plaintext);
     $note->author_uri = $author->href;
 

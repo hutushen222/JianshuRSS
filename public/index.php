@@ -141,16 +141,12 @@ $app->get('/feeds/recommendations/notes', function () use ($app) {
     );
 
     $notes = array();
-    foreach ($html->find('.thumbnails li .article') as $article) {
+    foreach ($html->find('.article-list li') as $article) {
         $note = new stdClass();
 
-        $title = $article->find('a.title', 0);
+        $title = $article->find('.title a', 0);
         $note->title = trim($title->plaintext);
         $note->uri = $title->href;
-
-        $notebook = $article->find('a.notebook', 0);
-        $note->book = trim($notebook->plaintext);
-        $note->book_uri = $notebook->href;
 
         $notes[] = $note;
     }
@@ -187,25 +183,22 @@ $app->get('/feeds/recommendations/notes', function () use ($app) {
 
 $app->get('/feeds/collections/:id', function ($id) use ($app) {
     $html_str = file_get_contents(JIANSHU_COLLECTIONS_ROOT . $id);
+
     $html = str_get_html($html_str);
 
     $meta = array(
-        'title' => trim($html->find('.aside .title', 0)->plaintext),
+        'title' => trim($html->find('.header h3 a', 0)->plaintext),
         'link' => JIANSHU_COLLECTIONS_ROOT . $id,
-        'description' => trim($html->find('.aside .description', 0)->plaintext),
+        'description' => trim($html->find('.collection-top .description', 0)->plaintext),
     );
 
     $notes = array();
-    foreach ($html->find('.thumbnails li') as $article) {
+    foreach ($html->find('.article-list li') as $article) {
         $note = new stdClass();
 
         $title = $article->find('h4 a', 0);
         $note->title = trim($title->plaintext);
         $note->uri = $title->href;
-
-        $notebook = $article->find('a.notebook', 0);
-        $note->book = trim($notebook->plaintext);
-        $note->book_uri = $notebook->href;
 
         $notes[] = $note;
     }
@@ -224,7 +217,7 @@ $app->get('/feeds/collections/:id', function ($id) use ($app) {
         ->appendTo($feed);
     foreach ($notes as $note) {
         $item = new \Suin\RSSWriter\Item();
-        $item = $item->title($note->title . ' by ' . $note->author . ' · ' . $note->book)
+        $item = $item->title($note->title . ' by ' . $note->author)
             ->url(JIANSHU . $note->uri)
             ->description($note->body)
             ->pubDate(strtotime($note->created))
@@ -310,13 +303,9 @@ $app->get('/feeds/users/:id', function ($id) use ($app) {
     foreach ($html->find('.recent-post .latest-notes li') as $article) {
         $note = new stdClass();
 
-        $title = $article->find('.title', 0);
+        $title = $article->find('.title a', 0);
         $note->uri = $title->href;
         $note->title = trim($title->plaintext);
-
-        $notebook = $article->find('a.notebook', 0);
-        $note->book = trim($notebook->plaintext);
-        $note->book_uri = $notebook->href;
 
         $notes[] = $note;
     }
@@ -335,7 +324,7 @@ $app->get('/feeds/users/:id', function ($id) use ($app) {
         ->appendTo($feed);
     foreach ($notes as $note) {
         $item = new \Suin\RSSWriter\Item();
-        $item = $item->title($note->title . ' by ' . $note->author . ' · ' . $note->book)
+        $item = $item->title($note->title . ' by ' . $note->author)
             ->url(JIANSHU . $note->uri)
             ->description($note->body)
             ->pubDate(strtotime($note->created))
