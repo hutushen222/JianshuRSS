@@ -12,7 +12,7 @@ abstract class Node
     {
         $this->title = $title ?? '';
         $this->link = $link ?? '';
-        $this-> description = $description ?? '';
+        $this->description = $description ?? '';
     }
 
     public function getTitle()
