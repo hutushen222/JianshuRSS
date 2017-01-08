@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Jianshu RSS</title>
     <link rel="icon" type="image/png" href="<?=$rootUri?>/assets/img/icon.png">
-    <link rel="stylesheet" href="http://cdn.staticfile.org/twitter-bootstrap/3.0.0-rc1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?=$rootUri?>/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?=$rootUri?>/assets/css/animate.min.css">
     <link rel="stylesheet" href="<?=$rootUri?>/assets/css/style.css">
 </head>
@@ -18,20 +18,18 @@
 
     <form action="<?php echo $action; ?>" method="post">
         <div class="form-group">
-            <input id="url" type="text" class="form-control" name="url" value="" placeholder="请输入简书的地址，如：http://www.jianshu.com/recommendations/notes">
+            <input id="url" type="text" class="form-control" name="url" value="" placeholder="请输入简书的地址，如：http://www.jianshu.com">
             <input id="submit-url" type="submit" class="btn btn-primary btn-lg btn-block" value="Go">
         </div>
     </form>
 
     <div class="hot-links">
         <ul class="list-unstyled list-inline clearfix">
-            <li><a target="_blank" href="<?=$rootUri?>/feeds/latest/notes" title="简书最新文章">最新文章</a></li>
-            <li><a target="_blank" href="<?=$rootUri?>/feeds/recommendations/notes" title="简书编辑推荐">编辑推荐</a></li>
-            <li><a target="_blank" href="<?=$rootUri?>/feeds/collections/u1J6LM" title="思考中国的过去、现在及未来。">想想中国</a></li>
-            <li><a target="_blank" href="<?=$rootUri?>/feeds/users/y4D4YX" title="滤镜菲林是一个基于互联网平台的新闻实验室，欢迎各位媒体极客。">滤镜菲林</a></li>
-            <li><a target="_blank" href="<?=$rootUri?>/feeds/users/QAARHp" title="内涵不是吹的">李铃铛</a></li>
-            <li><a target="_blank" href="<?=$rootUri?>/feeds/users/y3Dbcz" title="我乃简叔，简书联合创始人。">linlis</a></li>
-            <li><a target="_blank" href="<?=$rootUri?>/feeds/users/kjtzTG" title="越正经就越不正经，可还是要正经；越希望就越绝望，可还是要希望。">Light</a></li>
+            <li><a target="_blank" href="<?=$rootUri?>/feeds/homepage" title="简书首页">首页</a></li>
+            <li><a target="_blank" href="<?=$rootUri?>/feeds/recommendations/notes/latest" title="新上榜">新上榜</a></li>
+            <li><a target="_blank" href="<?=$rootUri?>/feeds/recommendations/notes/daily" title="日报">日报</a></li>
+            <li><a target="_blank" href="<?=$rootUri?>/feeds/trending/weekly" title="7日热门">7日热门</a></li>
+            <li><a target="_blank" href="<?=$rootUri?>/feeds/trending/monthly" title="30日热门">30日热门</a></li>
         </ul>
     </div>
 
@@ -44,8 +42,6 @@
     </div>
 
 </div>
-<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
-<script type="text/javascript" src="http://cdn.staticfile.org/twitter-bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
 
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

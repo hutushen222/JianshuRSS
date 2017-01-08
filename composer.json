@@ -7,6 +7,9 @@
         "php": ">=5.3.0",
         "suin/php-rss-writer": ">=1.2"
     },
+    "autoload": {
+        "classmap": ["library/classes"]
+    },
     "license": "MIT",
     "authors": [
         {
