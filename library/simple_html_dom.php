@@ -1156,6 +1156,10 @@ class simple_html_dom
 		// Save the original size of the html that we got in.  It might be useful to someone.
 		$this->original_size = $this->size;
 
+		// bug fix #155 https://sourceforge.net/p/simplehtmldom/bugs/155/
+		$str = str_replace("{", "&#123", $str);
+		$str = str_replace("}", "&#125", $str);
+
 		//before we save the string as the doc...  strip out the \r \n's if we are told to.
 		if ($stripRN) {
 			$str = str_replace("\r", " ", $str);
