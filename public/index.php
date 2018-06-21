@@ -20,6 +20,12 @@ $app->get('/', function () use ($app) {
 $app->post('/', function () use ($app) {
     $url = trim($app->request()->post('url'));
 
+    // 移除 Scheme
+    $pos = strpos($url, ':');
+    if ($pos !== false && $pos <= 5) {
+        $url = substr($url, $pos + 1);
+    }
+
     if ($url && str_start_with(JIANSHU_ROOT, $url)) {
         if (str_start_with(JIANSHU_RECOMMENDATIONS_ROOT, $url)) {
             $app->redirect($app->urlFor('feeds.recommendations'));

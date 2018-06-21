@@ -5,7 +5,8 @@
         "slim/slim": "2.*",
         "slim/extras": "2.*",
         "php": ">=5.3.0",
-        "suin/php-rss-writer": ">=1.2"
+        "suin/php-rss-writer": ">=1.2",
+        "symfony/var-dumper": "^3.4"
     },
     "autoload": {
         "classmap": ["library/classes"]

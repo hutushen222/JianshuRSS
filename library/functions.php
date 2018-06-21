@@ -21,13 +21,9 @@ function app($app = null)
     return $inner;
 }
 
-function dd($str)
+function dd(...$params)
 {
-    if (!is_string($str)) {
-        $str = var_export($str, true);
-    }
-
-    echo '<pre>', htmlentities($str), '</pre>';
+    dump($params);
     die;
 }
 
@@ -98,6 +94,10 @@ function cache_file_path($filename)
 
 function html_dom($url, $ttl = 900)
 {
+    if (str_start_with('//', $url)) {
+        $url = 'https:' . $url;
+    }
+
     $cacheFilePath = cache_file_path(md5($url) . '.html');
 
     if (file_exists($cacheFilePath) && filemtime($cacheFilePath) > time() - $ttl) {

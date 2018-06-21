@@ -12,20 +12,20 @@ define('NOTES_ROOT', ROOT . DS . 'storage' . DS . 'notes');
 
 
 // 首页
-define('JIANSHU_ROOT', 'http://www.jianshu.com');
+define('JIANSHU_ROOT', '//www.jianshu.com');
 
 // 推荐的前缀
-define('JIANSHU_RECOMMENDATIONS_ROOT', 'http://www.jianshu.com/recommendations/notes');
+define('JIANSHU_RECOMMENDATIONS_ROOT', '//www.jianshu.com/recommendations/notes');
 
 // 热门的前缀
-define('JIANSHU_TRENDING_WEEKLY_ROOT', 'http://www.jianshu.com/trending/weekly');
-define('JIANSHU_TRENDING_MONTHLY_ROOT', 'http://www.jianshu.com/trending/monthly');
+define('JIANSHU_TRENDING_WEEKLY_ROOT', '//www.jianshu.com/trending/weekly');
+define('JIANSHU_TRENDING_MONTHLY_ROOT', '//www.jianshu.com/trending/monthly');
 
 // 专题的前缀
-define('JIANSHU_COLLECTIONS_ROOT', 'http://www.jianshu.com/c/');
+define('JIANSHU_COLLECTIONS_ROOT', '//www.jianshu.com/c/');
 
 // 文集的前缀
-define('JIANSHU_NOTEBOOKS_ROOT', 'http://www.jianshu.com/nb/');
+define('JIANSHU_NOTEBOOKS_ROOT', '//www.jianshu.com/nb/');
 
 // 作者的前缀
-define('JIANSHU_USERS_ROOT', 'http://www.jianshu.com/u/');
+define('JIANSHU_USERS_ROOT', '//www.jianshu.com/u/');
